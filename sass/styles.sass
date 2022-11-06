@@ -1,0 +1,83 @@
+$main-themes: hsl(31, 77%, 52%), hsl(184, 100%, 22%), hsl(179, 100%, 13%)
+//Add variables for text color, as mentioned in notepad
+
+@mixin car-body($theme-color)
+  background-color: $theme-color
+
+  //This would have been higher specificity, so I have to add
+  //the button:hover code into this mixin :(
+  button
+    color: $theme-color
+
+  button:hover
+    color: hsl(0, 0%, 95%)
+
+body
+  margin: 0
+  min-height: 100vh
+
+  display: flex
+  justify-content: center
+  align-items: center
+
+main
+  display: flex
+  max-width: 1080px
+  height: fit-content
+
+  section
+    padding: 3.75em
+
+    header
+      h1
+        font-family: 'Big Shoulders Display', cursive
+        font-weight: 700
+        color: hsl(0, 0%, 95%)
+        font-size: 36px
+
+    p, button
+      font-family: 'Lexend Deca', sans-serif
+      font-weight: 400
+      line-height: 1.5
+      font-size: 15px
+
+    .body-text
+      margin-bottom: 5em
+      color: hsla(0, 0%, 100%, 0.75)
+
+    button
+      border-radius: 52px
+      border-width: 0
+      border-color: hsl(0, 0%, 95%)
+
+      background-color: white
+      height: 3em
+      width: 75%
+
+    button:hover
+      border-width: 2px
+      cursor: pointer
+      border-style: solid
+      //Transparent background
+      background-color: rgba(0, 0, 0, 0)
+
+  @for $i from 1 through 3
+    section:nth-child(#{$i})
+      @if $i == 1
+        border-radius: 10px 0 0 10px
+
+      @if $i == 3
+        border-radius: 0 10px 10px 0
+
+      @include car-body(nth($main-themes, $i))
+
+@media only screen and (max-width: 740px)
+  main
+    padding: 1em
+    flex-direction: column
+
+    section:nth-child(1)
+      border-radius: 10px 10px 0 0
+
+    section:nth-child(3)
+      border-radius: 0 0 10px 10px
